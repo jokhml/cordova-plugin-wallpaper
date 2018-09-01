@@ -13,6 +13,7 @@ import android.os.Build;
 import org.apache.cordova.PluginResult;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.FileInputStream;
 
 public class wallpaper extends CordovaPlugin
 {
@@ -44,7 +45,6 @@ public class wallpaper extends CordovaPlugin
 	{
 		try
 		{
-			AssetManager assetManager = context.getAssets();
 			Bitmap bitmap;
 			if(base64) //Base64 encoded
 			{
@@ -53,7 +53,7 @@ public class wallpaper extends CordovaPlugin
 			}
 			else //normal path
 			{
-				InputStream instr = assetManager.open("www/" + image);
+				InputStream instr = new FileInputStream(image);
 				bitmap = BitmapFactory.decodeStream(instr);
 			}
 			WallpaperManager myWallpaperManager = WallpaperManager.getInstance(context);
